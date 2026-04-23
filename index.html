@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Safe Flight ✈️</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(0,0,0,0.4);
+      animation: fadeIn 2s ease;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #38bdf8;
+      color: black;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #0ea5e9;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* ❤️ Hati jatuh */
+    .heart {
+      position: absolute;
+      top: -10px;
+      color: pink;
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+
+    /* Popup */
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+
+    #popup button {
+      margin-top: 10px;
+      background: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>✈️ Safe Flight!</h1>
+    <p>Safe Flight ya Kirena Kleantha (Komang Tri Widiari) 🤍</p>
+    <p>Hati-hati di jalan dan sampai tujuan dengan selamat</p>
+
+    <button onclick="showMessage()">Klik ini 💌</button>
+  </div>
+
+  <!-- ✅ Popup HARUS di luar script -->
+  <div id="popup">
+    <p>Safe flight ya... Aku nunggu kabar kamu 😊✈️</p>
+    <button onclick="closePopup()">Tutup</button>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    // Generate hati jatuh
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 10 + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
