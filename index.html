@@ -1,131 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Safe Flight ✈️</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<title>Untuk Kamu</title>
 
-    .card {
-      position: relative;
-      z-index: 2;
-      background: rgba(255,255,255,0.05);
-      padding: 40px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 30px rgba(0,0,0,0.4);
-      animation: fadeIn 2s ease;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #2a1a4a, #0f172a 70%);
+  overflow: hidden;
+}
 
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      background: #38bdf8;
-      color: black;
-      cursor: pointer;
-      font-weight: bold;
-    }
+/* GLOW */
+body::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: #ff4ecd;
+  filter: blur(150px);
+  top: -100px;
+  left: -100px;
+  opacity: 0.4;
+}
+body::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: #00f2fe;
+  filter: blur(150px);
+  bottom: -100px;
+  right: -100px;
+  opacity: 0.4;
+}
 
-    button:hover {
-      background: #0ea5e9;
-    }
+/* CHAT */
+.chat-box {
+  width: 330px;
+  height: 500px;
+  padding: 20px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  overflow-y: auto;
+  z-index: 2;
+}
 
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
+/* SCROLLBAR CUSTOM */
+.chat-box::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-box::-webkit-scrollbar-thumb {
+  background: linear-gradient(#ff4ecd, #00f2fe);
+  border-radius: 10px;
+}
 
-    /* ❤️ Hati jatuh */
-    .heart {
-      position: absolute;
-      top: -10px;
-      color: pink;
-      animation: fall linear infinite;
-      z-index: 1;
-    }
+/* MESSAGE */
+.message {
+  padding: 12px 16px;
+  margin: 10px 0;
+  border-radius: 20px;
+  max-width: 75%;
+  font-size: 14px;
+  color: white;
+  animation: fadeIn 0.4s ease;
+}
 
-    @keyframes fall {
-      to {
-        transform: translateY(110vh);
-      }
-    }
+.me {
+  margin-left: auto;
+  background: linear-gradient(135deg, #ff4ecd, #00f2fe);
+  box-shadow: 0 4px 20px rgba(255, 78, 205, 0.5);
+}
 
-    /* Popup */
-    #popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #1e293b;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      z-index: 999;
-    }
+/* TYPING */
+.typing {
+  font-size: 13px;
+  color: #fff;
+  opacity: 0.9;
+  margin: 8px;
+  text-shadow: 0 0 8px rgba(255,255,255,0.8);
+  animation: blink 1s infinite;
+}
 
-    #popup button {
-      margin-top: 10px;
-      background: #38bdf8;
-    }
-  </style>
+/* ANIMASI */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes blink {
+  50% { opacity: 0.3; }
+}
+
+/* BUTTON START */
+.start-btn {
+  position: absolute;
+  z-index: 5;
+  padding: 12px 20px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(135deg, #ff4ecd, #00f2fe);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 78, 205, 0.6);
+}
+</style>
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>✈️ Safe Flight!</h1>
-    <p>Safe Flight ya Kirena Kleantha (Komang Tri Widiari) 🤍</p>
-    <p>Hati-hati di jalan dan sampai tujuan dengan selamat</p>
+<button class="start-btn" onclick="startAll()">Klik dulu ya 😊</button>
 
-    <button onclick="showMessage()">Klik ini 💌</button>
-  </div>
+<div class="chat-box" id="chat"></div>
 
-  <!-- ✅ Popup HARUS di luar script -->
-  <div id="popup">
-    <p>Safe flight ya... Aku nunggu kabar kamu 😊✈️</p>
-    <button onclick="closePopup()">Tutup</button>
-  </div>
+<!-- AUDIO (ganti link kalau mau versi lain) -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2021/11/25/audio_91b4c2cce6.mp3?filename=soft-piano-100-bpm-121529.mp3" type="audio/mpeg">
+</audio>
 
-  <script>
-    function showMessage() {
-      document.getElementById("popup").style.display = "block";
-    }
+<script>
+const messages = [
+  "kamu lagi sama temen ya?",
+  "seru ga?",
+  "aku ganggu ga sih...",
+  "gapapa sih kalau kamu emang enjoy dan fun",
+  "aku cuma mau bilang...",
+  "aku nunggu kamu pulang 😊",
+  "jangan lupa ya aku tunggu",
+  "hati hati ya di jalan",
+  "kalo emang malem ini ga bisa call gapapa ya jangan di paksa",
+  "jangan pulang subuh ya widiari",
+  "aku ga tau kamu lagi mikirin aku atau engga... tapi aku jelas mikirin kamu",
+  "사랑해"
+];
 
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-    }
+let i = 0;
 
-    // Generate hati jatuh
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "❤️";
+function startAll() {
+  document.querySelector(".start-btn").style.display = "none";
 
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 10 + "px";
-      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+  const music = document.getElementById("music");
+  music.volume = 0.4; // biar ga kaget
+  music.play().catch(err => {
+    console.log("Audio error:", err);
+  });
 
-      document.body.appendChild(heart);
+  showMessage();
+}
 
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
-    }
+function showMessage() {
+  if (i >= messages.length) return;
 
-    setInterval(createHeart, 300);
-  </script>
+  const chat = document.getElementById("chat");
+
+  const typing = document.createElement("div");
+  typing.className = "typing";
+  typing.innerText = "lagi ngetik...";
+  chat.appendChild(typing);
+
+  setTimeout(() => {
+    typing.remove();
+
+    const msg = document.createElement("div");
+    msg.className = "message me";
+    msg.innerText = messages[i];
+    chat.appendChild(msg);
+
+    chat.scrollTop = chat.scrollHeight;
+
+    i++;
+    setTimeout(showMessage, 1400);
+  }, 900);
+}
+</script>
 
 </body>
 </html>
