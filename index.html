@@ -11,148 +11,112 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #141e30, #243b55);
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   font-family: 'Segoe UI', sans-serif;
   color: white;
-  text-align: center;
   overflow: hidden;
 }
 
 .container {
-  max-width: 500px;
-  padding: 30px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
-  animation: fadeIn 2s ease;
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
 }
 
-h1 {
-  font-size: 26px;
-  margin-bottom: 15px;
+#text {
+  font-size: 22px;
+  line-height: 1.6;
+  border-right: 2px solid white;
+  display: inline-block;
+  padding-right: 5px;
+  animation: blink 0.8s infinite;
 }
 
-p {
-  font-size: 17px;
-  line-height: 1.7;
-  min-height: 80px;
+@keyframes blink {
+  0% { border-color: transparent; }
+  50% { border-color: white; }
+  100% { border-color: transparent; }
 }
 
 button {
-  margin-top: 20px;
-  padding: 12px 25px;
+  margin-top: 30px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 25px;
-  background: linear-gradient(45deg, #ff4d6d, #ff758f);
-  color: white;
+  background: white;
+  color: #2c5364;
+  font-size: 16px;
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 14px;
   transition: 0.3s;
 }
 
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+button:hover {
+  background: #ddd;
 }
 
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255,77,109,0.6);
+.fade {
+  animation: fadeIn 2s ease forwards;
 }
 
 @keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
-/* efek bintang */
-.star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  animation: twinkle 3s infinite;
-}
-
-@keyframes twinkle {
-  0%,100% {opacity: 0.2;}
-  50% {opacity: 1;}
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="container">
-  <h1>Untuk Kamu 🤍</h1>
-  <p id="text">Bao Baonya Aku, Kirena Kleantha</p>
-  <button id="btn" onclick="lanjut()">Klik aku</button>
+  <div id="text"></div>
+  <br>
+  <button onclick="lanjut()">Klik ini kalau kamu sudah baca ya...</button>
 </div>
 
 <script>
-let pesan = [
-  "Maaf ya kalau aku pernah salah atau bikin kamu overthinking.",
-  "Aku benar-benar nggak ada maksud seperti itu.",
+const pesan = [
+  "Aku nggak tahu harus mulai dari mana...",
+  "Tapi ada satu hal yang jujur banget...",
+  "Aku masih menyukaimu...",
+  "Sampai sekarang ini...",
+  "Semoga kamu bisa mulai buka hati ke aku",
+  "Jangan mikir hal yang ga berguna, aku selalu menantikan kita ketemu.",
+  "Tetap sabar, tetap sayang, tetap sukai aku ya Widiari",
   "",
-  "Jujur aja...",
-  "orang yang aku suka sekarang cuma kamu, Kirena Kleantha.",
-  "",
-  "Aku selalu berusaha supaya kamu nggak sedih atau ovt tentang aku meskipun kamu b aja.",
-  "Tapi kalau caraku malah bikin kamu kepikiran...",
-  "sorry ya.",
-  "",
-  "Jujur aku bersyukur banget bisa kenal kamu.",
-  "Dan aku harap kamu nggak bosan sama aku.",
-  "",
-  "I'll always try to kasih kamu yang terbaik.",
-  "",
-  "Dan satu hal yang penting...",
-  "aku nggak pernah nyesel punya perasaan ini ke kamu.",
-  "",
-  "Aku selalu all in untuk kamu, tanpa mengharapkan kembalian ? atau sebaliknya begitulah.",
-  "paling 사진 ini aja aku terima hehe",
-  "",
-  "Dan Terakhir...",
-  "sorry ya, Kirena. 사랑해🤍",
+  "Aku cuma pengen kamu tahu itu."
 ];
 
 let index = 0;
-let typingSpeed = 40;
-let isTyping = false;
+let charIndex = 0;
 
-function typeText(text, i = 0) {
-  isTyping = true;
-
-  if (i < text.length) {
-    document.getElementById("text").innerHTML += text.charAt(i);
-    setTimeout(() => typeText(text, i + 1), typingSpeed);
-  } else {
-    isTyping = false;
-    document.getElementById("btn").disabled = false;
+function ketik() {
+  if (index < pesan.length) {
+    if (charIndex < pesan[index].length) {
+      document.getElementById("text").innerHTML += pesan[index].charAt(charIndex);
+      charIndex++;
+      setTimeout(ketik, 50);
+    } else {
+      document.getElementById("text").innerHTML += "<br>";
+      index++;
+      charIndex = 0;
+      setTimeout(ketik, 700);
+    }
   }
 }
+
+ketik();
 
 function lanjut() {
-  if (isTyping) return; // anti spam
-
-  if(index < pesan.length) {
-    let btn = document.getElementById("btn");
-    btn.disabled = true;
-
-    document.getElementById("text").innerHTML = "";
-    typeText(pesan[index]);
-    index++;
-  }
-}
-
-/* generate bintang */
-for(let i=0;i<40;i++){
-  let star = document.createElement("div");
-  star.className = "star";
-  star.style.top = Math.random()*100+"%";
-  star.style.left = Math.random()*100+"%";
-  document.body.appendChild(star);
+  document.body.innerHTML = `
+    <div class="container fade">
+      <h2>🤍</h2>
+      <p style="font-size:20px;">
+        Makasih ya kirena<br><br>
+        Semoga plan yang kita emang rencanain terkabul ya kiren<br><br>
+        Sadhu Sadhu Sadhu
+      </p>
+    </div>
+  `;
 }
 </script>
 
