@@ -1,124 +1,229 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Untuk Kamu 🤍</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一路平安 ✈️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Inter:wght@300;400;500&display=swap');
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  overflow: hidden;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-.container {
-  text-align: center;
-  max-width: 600px;
-  padding: 20px;
-}
+    body {
+      min-height: 100vh;
+      background: #0d0d14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
 
-#text {
-  font-size: 22px;
-  line-height: 1.6;
-  border-right: 2px solid white;
-  display: inline-block;
-  padding-right: 5px;
-  animation: blink 0.8s infinite;
-}
+    /* ====== BACKGROUND STARS ====== */
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
 
-@keyframes blink {
-  0% { border-color: transparent; }
-  50% { border-color: white; }
-  100% { border-color: transparent; }
-}
+    /* ====== GLOW BLOBS ====== */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      z-index: 0;
+    }
+    .blob1 { width: 380px; height: 380px; background: #7b4fa6; top: -80px; left: -80px; }
+    .blob2 { width: 300px; height: 300px; background: #3a6fa6; bottom: -60px; right: -60px; }
+    .blob3 { width: 200px; height: 200px; background: #c2607a; bottom: 30%; left: 20%; }
 
-button {
-  margin-top: 30px;
-  padding: 10px 20px;
-  border: none;
-  background: white;
-  color: #2c5364;
-  font-size: 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+    /* ====== PLANE ANIMATION ====== */
+    .plane-wrap {
+      position: fixed;
+      top: 12%;
+      left: -80px;
+      z-index: 1;
+      animation: fly 14s linear infinite;
+    }
+    @keyframes fly { from { left: -80px; } to { left: 110%; } }
 
-button:hover {
-  background: #ddd;
-}
+    .plane-emoji { font-size: 28px; }
+    .trail {
+      position: absolute;
+      top: 52%; left: -70px;
+      width: 65px; height: 1.5px;
+      background: linear-gradient(to left, rgba(255,255,255,0.5), transparent);
+    }
 
-.fade {
-  animation: fadeIn 2s ease forwards;
-}
+    /* ====== CARD ====== */
+    .card {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 480px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 44px 40px;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
 
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-</style>
+    /* top line accent */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 2px;
+      background: linear-gradient(to right, #b06ab3, #4776e6);
+      border-radius: 2px;
+    }
 
+    /* ====== CHINESE HEADER ====== */
+    .cn-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #e8d5f5;
+      letter-spacing: 6px;
+      margin-bottom: 6px;
+    }
+
+    .cn-sub {
+      font-size: 12px;
+      color: rgba(200,180,230,0.45);
+      letter-spacing: 3px;
+      margin-bottom: 32px;
+    }
+
+    /* ====== DIVIDER ====== */
+    .divider {
+      width: 40px; height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 0 auto 28px;
+    }
+
+    /* ====== MESSAGE ====== */
+    .message {
+      font-size: 15.5px;
+      color: #d4c8e8;         /* WARNA TEKS — ubah di sini kalau mau lebih terang/gelap */
+      line-height: 2;
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    /* teks yang mau di-highlight */
+    .soft {
+      color: #c9a7eb;
+      font-style: italic;
+    }
+
+    /* teks mandarin inline */
+    .cn-inline {
+      font-family: 'Noto Serif SC', serif;
+      color: #a89bc9;
+      font-size: 14px;
+    }
+
+    /* ====== FOOTER ====== */
+    .footer {
+      font-size: 12px;
+      color: rgba(180,160,210,0.5);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* ====== FLOATING DOTS ====== */
+    .dots {
+      position: fixed;
+      z-index: 0;
+      width: 100%; height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+    }
+    .dot {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      animation: floatDot linear infinite;
+    }
+    @keyframes floatDot {
+      from { transform: translateY(0); opacity: 0.5; }
+      to   { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-  <div id="text"></div>
-  <br>
-  <button onclick="lanjut()">Klik ini kalau kamu sudah baca ya...</button>
-</div>
+  <!-- Background glow -->
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
 
-<script>
-const pesan = [
-  "Aku nggak tahu harus mulai dari mana...",
-  "Tapi ada satu hal yang jujur banget...",
-  "Aku masih menyukaimu...",
-  "Sampai sekarang ini...",
-  "Semoga kamu bisa mulai buka hati ke aku",
-  "Jangan mikir hal yang ga berguna, aku selalu menantikan kita ketemu.",
-  "Tetap sabar, tetap sayang, tetap sukai aku ya Widiari",
-  "",
-  "Aku cuma pengen kamu tahu itu."
-];
+  <!-- Floating dots -->
+  <div class="dots" id="dots"></div>
 
-let index = 0;
-let charIndex = 0;
+  <!-- Plane -->
+  <div class="plane-wrap">
+    <div class="trail"></div>
+    <div class="plane-emoji">✈️</div>
+  </div>
 
-function ketik() {
-  if (index < pesan.length) {
-    if (charIndex < pesan[index].length) {
-      document.getElementById("text").innerHTML += pesan[index].charAt(charIndex);
-      charIndex++;
-      setTimeout(ketik, 50);
-    } else {
-      document.getElementById("text").innerHTML += "<br>";
-      index++;
-      charIndex = 0;
-      setTimeout(ketik, 700);
-    }
-  }
-}
+  <!-- ============================================ -->
+  <!--     CARD — EDIT BAGIAN INI SESUKA KAMU      -->
+  <!-- ============================================ -->
+  <div class="card">
 
-ketik();
+    <!-- Judul mandarin besar — bisa diganti -->
+    <div class="cn-title">For My Bao Bao Widiari</div>
+    <div class="cn-sub">semoga sempe tujuan dengan selamat ya sayang</div>
 
-function lanjut() {
-  document.body.innerHTML = `
-    <div class="container fade">
-      <h2>🤍</h2>
-      <p style="font-size:20px;">
-        Makasih ya kirena<br><br>
-        Semoga plan yang kita emang rencanain terkabul ya kiren<br><br>
-        Sadhu Sadhu Sadhu
-      </p>
+    <div class="divider"></div>
+
+    <div class="message">
+      <!-- ✏️ GANTI PESAN DI SINI -->
+      hati-hati ya,<br>
+      <span class="soft">sibal aku kangen lagi biasa udah pitkol </span><br><br>
+
+      semoga flightnya tenang,<br>
+      kalau kamu udah sampai kasih tau aku ya sayang.<br><br>
+
+      <span class="cn-inline">好好休息，</span><br>
+      <!-- artinya: istirahat yang baik -->
+      Aku tunggu call kamu ya kalo udah di bali, WAJIB pitkol kangeun pol soal e —<br>
+      <span class="soft">baibai sayang 🫶</span>
+      <!-- ✏️ SAMPAI SINI -->
     </div>
-  `;
-}
-</script>
 
+    <!-- Footer — bisa diganti -->
+    <div class="footer">✈️ &nbsp; 사랑해 &nbsp;·&nbsp; 宝宝 &nbsp; ✈️</div>
+    <!-- 平安到达 artinya: tiba dengan selamat -->
+
+  </div>
+  <!-- ============================================ -->
+
+  <script>
+    // Floating dots
+    const dotsEl = document.getElementById('dots');
+    for (let i = 0; i < 25; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot';
+      const size = Math.random() * 3 + 1;
+      d.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${Math.random()*100}%;
+        bottom:${Math.random()*20}%;
+        animation-duration:${6 + Math.random()*10}s;
+        animation-delay:${Math.random()*8}s;
+        opacity:${Math.random()*0.4 + 0.1};
+      `;
+      dotsEl.appendChild(d);
+    }
+  </script>
 </body>
 </html>
