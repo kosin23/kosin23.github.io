@@ -1,229 +1,134 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>一路平安 ✈️</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Inter:wght@300;400;500&display=swap');
+<meta charset="UTF-8">
+<title>Selamat Ulang Tahun</title>
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1e1e2f, #2b5876);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  overflow: hidden;
+}
 
-    body {
-      min-height: 100vh;
-      background: #0d0d14;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inter', sans-serif;
-      position: relative;
-      overflow: hidden;
-    }
+/* Floating particles */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  animation: float 10s linear infinite;
+}
 
-    /* ====== BACKGROUND STARS ====== */
-    canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-    }
+@keyframes float {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
+}
 
-    /* ====== GLOW BLOBS ====== */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.18;
-      z-index: 0;
-    }
-    .blob1 { width: 380px; height: 380px; background: #7b4fa6; top: -80px; left: -80px; }
-    .blob2 { width: 300px; height: 300px; background: #3a6fa6; bottom: -60px; right: -60px; }
-    .blob3 { width: 200px; height: 200px; background: #c2607a; bottom: 30%; left: 20%; }
+.container {
+  text-align: center;
+  max-width: 700px;
+  padding: 40px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: fadeIn 1.5s ease;
+}
 
-    /* ====== PLANE ANIMATION ====== */
-    .plane-wrap {
-      position: fixed;
-      top: 12%;
-      left: -80px;
-      z-index: 1;
-      animation: fly 14s linear infinite;
-    }
-    @keyframes fly { from { left: -80px; } to { left: 110%; } }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
 
-    .plane-emoji { font-size: 28px; }
-    .trail {
-      position: absolute;
-      top: 52%; left: -70px;
-      width: 65px; height: 1.5px;
-      background: linear-gradient(to left, rgba(255,255,255,0.5), transparent);
-    }
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
 
-    /* ====== CARD ====== */
-    .card {
-      position: relative;
-      z-index: 10;
-      width: 90%;
-      max-width: 480px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 24px;
-      padding: 44px 40px;
-      text-align: center;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
+p {
+  font-size: 16px;
+  line-height: 1.8;
+  min-height: 200px;
+}
 
-    /* top line accent */
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 60px; height: 2px;
-      background: linear-gradient(to right, #b06ab3, #4776e6);
-      border-radius: 2px;
-    }
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: #ff7675;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    /* ====== CHINESE HEADER ====== */
-    .cn-title {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 28px;
-      font-weight: 600;
-      color: #e8d5f5;
-      letter-spacing: 6px;
-      margin-bottom: 6px;
-    }
+button:hover {
+  background: #e84393;
+}
+</style>
 
-    .cn-sub {
-      font-size: 12px;
-      color: rgba(200,180,230,0.45);
-      letter-spacing: 3px;
-      margin-bottom: 32px;
-    }
-
-    /* ====== DIVIDER ====== */
-    .divider {
-      width: 40px; height: 1px;
-      background: rgba(255,255,255,0.15);
-      margin: 0 auto 28px;
-    }
-
-    /* ====== MESSAGE ====== */
-    .message {
-      font-size: 15.5px;
-      color: #d4c8e8;         /* WARNA TEKS — ubah di sini kalau mau lebih terang/gelap */
-      line-height: 2;
-      font-weight: 300;
-      margin-bottom: 28px;
-    }
-
-    /* teks yang mau di-highlight */
-    .soft {
-      color: #c9a7eb;
-      font-style: italic;
-    }
-
-    /* teks mandarin inline */
-    .cn-inline {
-      font-family: 'Noto Serif SC', serif;
-      color: #a89bc9;
-      font-size: 14px;
-    }
-
-    /* ====== FOOTER ====== */
-    .footer {
-      font-size: 12px;
-      color: rgba(180,160,210,0.5);
-      letter-spacing: 1px;
-      margin-top: 4px;
-    }
-
-    /* ====== FLOATING DOTS ====== */
-    .dots {
-      position: fixed;
-      z-index: 0;
-      width: 100%; height: 100%;
-      top: 0; left: 0;
-      pointer-events: none;
-    }
-    .dot {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.6);
-      animation: floatDot linear infinite;
-    }
-    @keyframes floatDot {
-      from { transform: translateY(0); opacity: 0.5; }
-      to   { transform: translateY(-100vh); opacity: 0; }
-    }
-  </style>
 </head>
+
 <body>
 
-  <!-- Background glow -->
-  <div class="blob blob1"></div>
-  <div class="blob blob2"></div>
-  <div class="blob blob3"></div>
+<!-- Floating elements -->
+<div class="circle" style="width:60px;height:60px;left:10%;animation-duration:12s;"></div>
+<div class="circle" style="width:30px;height:30px;left:40%;animation-duration:8s;"></div>
+<div class="circle" style="width:80px;height:80px;left:70%;animation-duration:15s;"></div>
+<div class="circle" style="width:25px;height:25px;left:85%;animation-duration:9s;"></div>
 
-  <!-- Floating dots -->
-  <div class="dots" id="dots"></div>
+<div class="container">
+  <h1>Selamat Ulang Tahun Kak Eny 🎂</h1>
+  <p id="text">Maafkan saya yang semalam nih di klik aja.</p>
+  <button onclick="startTyping()">Buka Pesan</button>
+</div>
 
-  <!-- Plane -->
-  <div class="plane-wrap">
-    <div class="trail"></div>
-    <div class="plane-emoji">✈️</div>
-  </div>
+<script>
+const message = `Hari ini bukan sekadar bertambah usia,
+tapi juga bertambah perjalanan, pengalaman, dan cerita.
 
-  <!-- ============================================ -->
-  <!--     CARD — EDIT BAGIAN INI SESUKA KAMU      -->
-  <!-- ============================================ -->
-  <div class="card">
+Di umur 27 ini,
+semoga semua yang kak eny rencanakan selalu dimudahkan,
+dan diberi jalan terbaik,
+serta semua hal baik datang tanpa perlu dipaksa.
 
-    <!-- Judul mandarin besar — bisa diganti -->
-    <div class="cn-title">For My Bao Bao Widiari</div>
-    <div class="cn-sub">semoga sempe tujuan dengan selamat ya sayang</div>
+Semoga kak eny selalu sehat,
+tetap kuat di setiap keadaan,
+dan tetap jadi pribadi yang kakak banggakan.
 
-    <div class="divider"></div>
+Rahayu ring warsa nuju rahayu,
+semoga panjang umur, sehat, lan becik rejekine.
 
-    <div class="message">
-      <!-- ✏️ GANTI PESAN DI SINI -->
-      hati-hati ya,<br>
-      <span class="soft">sibal aku kangen lagi biasa udah pitkol </span><br><br>
+Semoga apa yang belum bisa kaka capai,
+perlahan bisa kakak raih satu per satu.
 
-      semoga flightnya tenang,<br>
-      kalau kamu udah sampai kasih tau aku ya sayang.<br><br>
+Dan kalau suatu hari terasa berat,
+semoga kakak selalu ingat,
+kakak tidak sendiri ada aing muehehe meskipun energi social ku terkuras tapi tak apa kak asli ni.
 
-      <span class="cn-inline">好好休息，</span><br>
-      <!-- artinya: istirahat yang baik -->
-      Aku tunggu call kamu ya kalo udah di bali, WAJIB pitkol kangeun pol soal e —<br>
-      <span class="soft">baibai sayang 🫶</span>
-      <!-- ✏️ SAMPAI SINI -->
-    </div>
+Selamat ulang tahun ya kak eny 祝你一切顺利 `;
 
-    <!-- Footer — bisa diganti -->
-    <div class="footer">✈️ &nbsp; 사랑해 &nbsp;·&nbsp; 宝宝 &nbsp; ✈️</div>
-    <!-- 平安到达 artinya: tiba dengan selamat -->
+let i = 0;
 
-  </div>
-  <!-- ============================================ -->
+function startTyping() {
+  document.getElementById("text").innerHTML = "";
+  typeWriter();
+}
 
-  <script>
-    // Floating dots
-    const dotsEl = document.getElementById('dots');
-    for (let i = 0; i < 25; i++) {
-      const d = document.createElement('div');
-      d.className = 'dot';
-      const size = Math.random() * 3 + 1;
-      d.style.cssText = `
-        width:${size}px; height:${size}px;
-        left:${Math.random()*100}%;
-        bottom:${Math.random()*20}%;
-        animation-duration:${6 + Math.random()*10}s;
-        animation-delay:${Math.random()*8}s;
-        opacity:${Math.random()*0.4 + 0.1};
-      `;
-      dotsEl.appendChild(d);
-    }
-  </script>
+function typeWriter() {
+  if (i < message.length) {
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeWriter, 30);
+  }
+}
+</script>
+
 </body>
 </html>
