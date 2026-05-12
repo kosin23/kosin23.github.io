@@ -1,133 +1,167 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>Selamat Ulang Tahun</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>最後的訊息</title>
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #1e1e2f, #2b5876);
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  overflow: hidden;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Microsoft JhengHei", sans-serif;
 }
 
-/* Floating particles */
-.circle {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  animation: float 10s linear infinite;
+body{
+    background: linear-gradient(to bottom, #0f0f0f, #1b1b1b);
+    color: white;
+    overflow-x: hidden;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
 }
 
-@keyframes float {
-  from { transform: translateY(100vh); }
-  to { transform: translateY(-10vh); }
+/* Background particles */
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: moveBg 30s linear infinite;
+    z-index:-2;
 }
 
-.container {
-  text-align: center;
-  max-width: 700px;
-  padding: 40px;
-  background: rgba(0,0,0,0.4);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  animation: fadeIn 1.5s ease;
+@keyframes moveBg{
+    from{transform:translateY(0);}
+    to{transform:translateY(100px);}
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px);}
-  to { opacity: 1; transform: translateY(0);}
+/* Card */
+.container{
+    width:90%;
+    max-width:850px;
+    background: rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 0 30px rgba(255,255,255,0.08);
+    animation: fadeIn 2s ease;
 }
 
-h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+/* Title */
+.title{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:25px;
+    color:#ffb6c1;
+    text-shadow:0 0 10px rgba(255,182,193,0.6);
 }
 
-p {
-  font-size: 16px;
-  line-height: 1.8;
-  min-height: 200px;
+/* Message */
+.message{
+    line-height:2;
+    font-size:18px;
+    color:#f1f1f1;
+    white-space:pre-line;
 }
 
-button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 25px;
-  background: #ff7675;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
+/* Footer */
+.footer{
+    margin-top:30px;
+    text-align:right;
+    font-size:15px;
+    color:#bbb;
 }
 
-button:hover {
-  background: #e84393;
+/* Fade animation */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Floating hearts */
+.heart{
+    position:fixed;
+    color:rgba(255,105,180,0.3);
+    animation: float 8s linear infinite;
+    z-index:-1;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh) scale(0.5);
+        opacity:0;
+    }
+    20%{
+        opacity:1;
+    }
+    to{
+        transform:translateY(-10vh) scale(1.2);
+        opacity:0;
+    }
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- Floating elements -->
-<div class="circle" style="width:60px;height:60px;left:10%;animation-duration:12s;"></div>
-<div class="circle" style="width:30px;height:30px;left:40%;animation-duration:8s;"></div>
-<div class="circle" style="width:80px;height:80px;left:70%;animation-duration:15s;"></div>
-<div class="circle" style="width:25px;height:25px;left:85%;animation-duration:9s;"></div>
-
 <div class="container">
-  <h1>Selamat Ulang Tahun Kak Eny 🎂</h1>
-  <p id="text">Maafkan saya yang semalam nih di klik aja.</p>
-  <button onclick="startTyping()">Buka Pesan</button>
+    <div class="title">致你，我曾经喜欢的那个人</div>
+
+    <div class="message">
+也許我對你太有耐心了，也許我的耐心已經到了極限。我想我們終於走到這一步了……
+
+我覺得自己不再是你最重要的人，我覺得你只是想玩玩而已。如果我打擾到你了，我很抱歉。我愛你，這是真的，但單戀真的太累了……
+
+從一開始我就很困惑。我們已經停止視訊聊天了，我不知道該繼續還是放棄，因為你的行為有時讓我想要放棄，有時又讓我想要堅持……
+
+謝謝你，我的愛人，謝謝你這幾天一直陪著我，我真的好開心……我知道你也厭倦了我，謝謝你堅持到現在……
+
+你是一個美麗而堅強的女人，所以不要難過，不要去想我為什麼做出這個決定。我也很痛苦，經歷了這麼多，我不得不放手，但我還能怎麼做呢……
+
+說實話，我真的很想留住你，但如果你連生理期都這樣，我真的受不了。我害怕有一天我會突然情緒失控，影響到你，對不起……
+
+謝謝你，對不起，這甚至是我發給你的最後一封訊息。
+
+希望你能冷靜考慮，我還在等你的回覆。
+    </div>
+
+    <div class="footer">
+        — 마지막 사랑 —
+    </div>
 </div>
 
 <script>
-const message = `Hari ini bukan sekadar bertambah usia,
-tapi juga bertambah perjalanan, pengalaman, dan cerita.
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
 
-Di umur 27 ini,
-semoga semua yang kak eny rencanakan selalu dimudahkan,
-dan diberi jalan terbaik,
-serta semua hal baik datang tanpa perlu dipaksa.
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
 
-Semoga kak eny selalu sehat,
-tetap kuat di setiap keadaan,
-dan tetap jadi pribadi yang kakak banggakan.
+    document.body.appendChild(heart);
 
-Rahayu ring warsa nuju rahayu,
-semoga panjang umur, sehat, lan becik rejekine.
-
-Semoga apa yang belum bisa kaka capai,
-perlahan bisa kakak raih satu per satu.
-
-Dan kalau suatu hari terasa berat,
-semoga kakak selalu ingat,
-kakak tidak sendiri ada aing muehehe meskipun energi social ku terkuras tapi tak apa kak asli ni.
-
-Selamat ulang tahun ya kak eny 祝你一切顺利 `;
-
-let i = 0;
-
-function startTyping() {
-  document.getElementById("text").innerHTML = "";
-  typeWriter();
+    setTimeout(()=>{
+        heart.remove();
+    },8000);
 }
 
-function typeWriter() {
-  if (i < message.length) {
-    document.getElementById("text").innerHTML += message.charAt(i);
-    i++;
-    setTimeout(typeWriter, 30);
-  }
-}
+setInterval(createHeart,500);
 </script>
 
 </body>
