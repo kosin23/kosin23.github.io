@@ -1,167 +1,123 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>最後的訊息</title>
+<title>Untuk Kamu 🤍</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: "Microsoft JhengHei", sans-serif;
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  overflow: hidden;
 }
 
-body{
-    background: linear-gradient(to bottom, #0f0f0f, #1b1b1b);
-    color: white;
-    overflow-x: hidden;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:40px;
+.container {
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
 }
 
-/* Background particles */
-body::before{
-    content:"";
-    position:fixed;
-    width:100%;
-    height:100%;
-    background-image:
-      radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: moveBg 30s linear infinite;
-    z-index:-2;
+#text {
+  font-size: 22px;
+  line-height: 1.6;
+  border-right: 2px solid white;
+  display: inline-block;
+  padding-right: 5px;
+  animation: blink 0.8s infinite;
 }
 
-@keyframes moveBg{
-    from{transform:translateY(0);}
-    to{transform:translateY(100px);}
+@keyframes blink {
+  0% { border-color: transparent; }
+  50% { border-color: white; }
+  100% { border-color: transparent; }
 }
 
-/* Card */
-.container{
-    width:90%;
-    max-width:850px;
-    background: rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(12px);
-    border-radius:20px;
-    padding:40px;
-    box-shadow:0 0 30px rgba(255,255,255,0.08);
-    animation: fadeIn 2s ease;
+button {
+  margin-top: 30px;
+  padding: 10px 20px;
+  border: none;
+  background: white;
+  color: #2c5364;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* Title */
-.title{
-    text-align:center;
-    font-size:40px;
-    margin-bottom:25px;
-    color:#ffb6c1;
-    text-shadow:0 0 10px rgba(255,182,193,0.6);
+button:hover {
+  background: #ddd;
 }
 
-/* Message */
-.message{
-    line-height:2;
-    font-size:18px;
-    color:#f1f1f1;
-    white-space:pre-line;
+.fade {
+  animation: fadeIn 2s ease forwards;
 }
 
-/* Footer */
-.footer{
-    margin-top:30px;
-    text-align:right;
-    font-size:15px;
-    color:#bbb;
-}
-
-/* Fade animation */
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* Floating hearts */
-.heart{
-    position:fixed;
-    color:rgba(255,105,180,0.3);
-    animation: float 8s linear infinite;
-    z-index:-1;
-}
-
-@keyframes float{
-    from{
-        transform:translateY(100vh) scale(0.5);
-        opacity:0;
-    }
-    20%{
-        opacity:1;
-    }
-    to{
-        transform:translateY(-10vh) scale(1.2);
-        opacity:0;
-    }
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="container">
-    <div class="title">致你，我曾经喜欢的那个人</div>
-
-    <div class="message">
-也許我對你太有耐心了，也許我的耐心已經到了極限。我想我們終於走到這一步了……
-
-我覺得自己不再是你最重要的人，我覺得你只是想玩玩而已。如果我打擾到你了，我很抱歉。我愛你，這是真的，但單戀真的太累了……
-
-從一開始我就很困惑。我們已經停止視訊聊天了，我不知道該繼續還是放棄，因為你的行為有時讓我想要放棄，有時又讓我想要堅持……
-
-謝謝你，我的愛人，謝謝你這幾天一直陪著我，我真的好開心……我知道你也厭倦了我，謝謝你堅持到現在……
-
-你是一個美麗而堅強的女人，所以不要難過，不要去想我為什麼做出這個決定。我也很痛苦，經歷了這麼多，我不得不放手，但我還能怎麼做呢……
-
-說實話，我真的很想留住你，但如果你連生理期都這樣，我真的受不了。我害怕有一天我會突然情緒失控，影響到你，對不起……
-
-謝謝你，對不起，這甚至是我發給你的最後一封訊息。
-
-希望你能冷靜考慮，我還在等你的回覆。
-    </div>
-
-    <div class="footer">
-        — 마지막 사랑 —
-    </div>
+  <div id="text"></div>
+  <br>
+  <button onclick="lanjut()">Klik ini kalau kamu sudah baca ya...</button>
 </div>
 
 <script>
-function createHeart(){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤";
+const pesan = [
+  "Aku nggak tahu harus mulai dari mana...",
+  "Tapi ada satu hal yang jujur banget...",
+  "Aku masih menyukaimu...",
+  "Sampai sekarang ini...",
+  "Semoga kamu bisa mulai buka hati ke aku",
+  "Jangan mikir hal yang ga berguna, aku selalu menantikan kita ketemu.",
+  "Tetap sabar, tetap sayang, tetap sukai aku ya Widiari",
+  "",
+  "Aku cuma pengen kamu tahu itu."
+];
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-    heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
+let index = 0;
+let charIndex = 0;
 
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },8000);
+function ketik() {
+  if (index < pesan.length) {
+    if (charIndex < pesan[index].length) {
+      document.getElementById("text").innerHTML += pesan[index].charAt(charIndex);
+      charIndex++;
+      setTimeout(ketik, 50);
+    } else {
+      document.getElementById("text").innerHTML += "<br>";
+      index++;
+      charIndex = 0;
+      setTimeout(ketik, 700);
+    }
+  }
 }
 
-setInterval(createHeart,500);
+ketik();
+
+function lanjut() {
+  document.body.innerHTML = `
+    <div class="container fade">
+      <h2>🤍</h2>
+      <p style="font-size:20px;">
+        Makasih ya kirena<br><br>
+        Semoga plan yang kita emang rencanain terkabul ya kiren<br><br>
+        Sadhu Sadhu Sadhu
+      </p>
+    </div>
+  `;
+}
 </script>
 
 </body>
